@@ -11,7 +11,7 @@ const app = express();
 const PORT = process.env.PORT || 3333;
 
 //Mongoose per MDN / Mongoose documentation.
-const databaseUrl = 'mongodb://127.0.0.1/mongoHeadlines'; // database name per HW instructions
+const databaseUrl = 'mongodb://127.0.0.1/mongoHeadlines'; // database name per HW instructions.
 mongoose.connect(databaseUrl);
 // Get Mongoose to use the global promise library
 mongoose.Promise = global.Promise;
