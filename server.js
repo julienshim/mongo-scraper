@@ -17,9 +17,7 @@ const PORT = process.env.PORT || 3333;
 
 //Mongoose
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/mongoHeadlines", {
-  useMongoClient: true
-});
+mongoose.connect("mongodb://localhost/mongoHeadlines");
 
 //Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -69,7 +67,7 @@ app.get("/scrape", function(req, res) {
         db.Article.create(result)
           .then(function(dbArticle) {
             // View the added result in the console
-            console.log(dbArticle);
+            console.log(dbArticle)
           })
           .catch(function(err) {
             // If an error occurred, send it to the client

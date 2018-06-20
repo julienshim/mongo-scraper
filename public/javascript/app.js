@@ -2,6 +2,21 @@ $("#snaButton").on("click", function() {
 
   $.ajax({
     method: "GET",
+    url: "/scrape"
+  })
+    // With that done, add the note information to the page
+    .then(function(data) {
+      console.log(data);
+      getArticles();
+      $("#scrapeModal").modal();
+    });
+});
+
+
+function getArticles() {
+
+  $.ajax({
+    method: "GET",
     url: "/articles"
   })
     // With that done, add the note information to the page
@@ -20,7 +35,7 @@ $("#snaButton").on("click", function() {
       }
 
     });
-});
+};
 
 $(document).on("click", ".commentButton", function() {
   // Empty the notes from the note section
@@ -37,7 +52,7 @@ $(document).on("click", ".commentButton", function() {
     .then(function(data) {
 
       console.log(data);
-      $("#modal-body").append("<h2>" + data.title + "</h2>");
+      $("#modal-body").append("<h4>" + data.title + "</h4>");
       $("#modal-body").append("<hr>");
       $("#modal-body").append(`<textarea class="form-control" id='bodyinput' name='body' rows="3"></textarea>`);
       $(".saveButton").attr("data-id", data._id);
