@@ -1,41 +1,34 @@
 {{!-- Navigation Bar --}}
 
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Mongo Scraper</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Mongo Scraper</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Saved Articles</a>
+      </li>
+    </ul>
+      <button class="btn btn-outline-success my-2 my-sm-0" id="snaButton">Scrap New Articles</button>
 
-      <div class="collapse navbar-collapse" id="navbarsExample02">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Saved Articles</a>
-          </li>
-           <li class="nav-item">
-            <a class="nav-link" href="#"><button type="button" class="btn btn-primary">Scrape New Articles</button></a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+  </div>
+</nav>
 
 
 {{!-- Body --}}
 
-    <div class="jumbotron">
-      <div class="container">
-        <h1 class="display-3">Mongo Scraper</h1>
-        <p>DPReview.com Edition</p>
-      </div>
-    </div>
-    
-    <div>A place to append the scraped artices.</div>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4 text-center">Mongo Scraper</h1>
+    <p class="lead text-center">Digital Photography Review Edition</p>
+  </div>
+</div>
+<div id="articles"></div>
 
-{{!-- Footer --}}
 
-   <footer>
-        <p>&copy; Seme generic footer</p>
-      </footer>
