@@ -1,3 +1,5 @@
+getArticles();
+
 $("#snaButton").on("click", function() {
 
   $.ajax({
@@ -10,6 +12,7 @@ $("#snaButton").on("click", function() {
       getArticles();
       $("#scrapeModal").modal();
     });
+
 });
 
 
@@ -22,17 +25,29 @@ function getArticles() {
     // With that done, add the note information to the page
     .then(function(data) {
       console.log(data);
-      for (var i = 0 ; i < data.length; i++) {
-      $("#articles").append(`
-        <div class="card">
-          <div class="card-header font-weight-bold">${data[i].title}</div>
-          <div class="card-body">
-          <p class="card-text">${data[i].excerpt}</p>
-            <a href="${data[i].link}" target="_blank" class="btn btn-light">View Article</a>
-            <a href=#" data-id=${data[i]._id} class="btn btn-light commentButton">Notes</a>
-          </div>
-      </div>`);
+      if (data.length === 0) {
+        $("#articles").append(`<br><br><h2 class="text-center text-muted">Click 'Scrape New Articles' to get start.</h2>`);
+      } else {
+        $("#articles").empty();
+        for (var i = 0 ; i < data.length; i++) {
+          var noteCount;
+          if (data[i].note !== undefined){
+            noteCount = "1";
+          } else {
+            noteCount = "0";
+          }
+          $("#articles").append(`
+            <div class="card">
+              <div class="card-header font-weight-bold">${data[i].title}</div>
+              <div class="card-body">
+              <p class="card-text">${data[i].excerpt}</p>
+                <a href="${data[i].link}" target="_blank" class="btn btn-light">View Article</a>
+                <a href=#" data-id=${data[i]._id} class="btn btn-light commentButton">Notes (${noteCount})</a>
+              </div>
+          </div>`);
+          }
       }
+      
 
     });
 };
@@ -84,11 +99,16 @@ $(document).on("click", ".saveButton", function() {
     .then(function(data) {
       // Log the response
       console.log(data);
+      console.log("IN HERE!");
+      
+      $('#articleModal').modal('hide');
+      getArticles();
       // Empty the notes section
       // $("#notes").empty();
     });
 
   // Also, remove the values entered in the input and textarea for note entry
-  $('#articleModal').modal('hide');
+  
+  
   // $("#bodyinput").val("")
 });
