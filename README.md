@@ -1,14 +1,23 @@
 # mongo-scraper
 
+**Overview**
 
-**Requirements**
+The Mongo Scraper: Digital Photography Review Edition was created for the All the News That's Fit to Scrape (Mongoose/Cheerio) homework assignment for Berkeley Coding Bootcamp. Mongo Scraper: Digital Photography Review Edition is a web app that lets a user view leave notes on the latest news scraped from Digital Photography Review via Mongoose and Cheerio.
 
-1. Whenever a user visits the site, the app should scrape stories from a news outlet and display them for the user. Each scraped article should be saved to your application database. At a minimum, the app should scrape and display the following information for each article:
+**Deployment Requirements**
 
-     * Headline - the title of the article
+`npm i` will install the following:
 
-     * Summary - a short summary of the article
+* npm install express
+* npm install express-handlebars
+* npm install mongoose
+* npm install body-parser
+* npm install cheerio
+* npm install request
 
-     * URL - the url to the original article
+- Run schema.sql
+- Run seeds.sql
 
-2. Users should also be able to leave comments on the articles displayed and revisit them later. The comments should be saved to the database as well and associated with their articles. Users should also be able to delete comments left on articles. All stored comments should be visible to every user.
+**App Demo GIF**
+
+<img src="https://github.com/jerauld/mongo-scraper/blob/master/public/images/mongoscraper.gif?raw=true" width="600px"/>
