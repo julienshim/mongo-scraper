@@ -1,13 +1,14 @@
+//Init
 getArticles();
 
-$("#snaButton").on("click", function() {
+//When you Scrape New Articles 
+$("#snaButton").on("click", function () {
 
   $.ajax({
     method: "GET",
     url: "/scrape"
   })
-    // With that done, add the note information to the page
-    .then(function(data) {
+    .then(function (data) {
       console.log(data);
       getArticles();
       $("#scrapeModal").modal();
@@ -22,17 +23,16 @@ function getArticles() {
     method: "GET",
     url: "/articles"
   })
-    // With that done, add the note information to the page
-    .then(function(data) {
+    .then(function (data) {
       console.log(data);
       if (data.length === 0) {
         $("#articles").append(`<br><br><h2 class="text-center text-muted">Click 'Scrape New Articles' to get start.</h2>`);
       } else {
         $("#articles").empty();
-        for (var i = 0 ; i < data.length; i++) {
+        for (var i = 0; i < data.length; i++) {
           var noteButtonText;
           var buttonStyle;
-          if (data[i].note !== undefined){
+          if (data[i].note !== undefined) {
             noteButtonText = "View Note";
             buttonStyle = "btn-outline-info";
           } else {
@@ -48,28 +48,26 @@ function getArticles() {
                 <a href=#" data-id=${data[i]._id} class="btn ${buttonStyle} commentButton">${noteButtonText}</a>
               </div>
           </div>`);
-          }
+        }
       }
-      
+
 
     });
 };
 
-$(document).on("click", ".commentButton", function() {
-  // Empty the notes from the note section
+//When you click view note button.
+$(document).on("click", ".commentButton", function () {
   $("#modal-body").empty();
-  // Save the id from the p tag
   var thisId = $(this).attr("data-id");
 
-  // Now make an ajax call for the Article
   $.ajax({
     method: "GET",
     url: "/articles/" + thisId
   })
-    // With that done, add the note information to the page
-    .then(function(data) {
+    .then(function (data) {
 
       console.log(data);
+
       $("#modal-body").append(`<h4> Article: ${data.title}</h4>`);
       $("#modal-body").append("<hr>");
       $("#modal-body").append(`<input class="form-control" type="text" placeholder="Note Title" id="titleinput">`);
@@ -80,41 +78,33 @@ $(document).on("click", ".commentButton", function() {
         $("#titleinput").val(data.note.title);
         $("#bodyinput").val(data.note.body);
       }
+
     });
 
-    $("#articleModal").modal();
+  $("#articleModal").modal();
 });
 
 
-// When you click the savenote button
-$(document).on("click", ".saveButton", function() {
+//When you click the save note button.
+$(document).on("click", ".saveButton", function () {
 
-  // Grab the id associated with the article from the submit button
   var thisId = $(this).attr("data-id");
 
   $.ajax({
     method: "POST",
     url: "/articles/" + thisId,
     data: {
-      // Value taken from note textarea
       title: $("#titleinput").val(),
       body: $("#bodyinput").val()
     }
   })
-    // With that done
-    .then(function(data) {
-      // Log the response
-      console.log(data);
-      // console.log("IN HERE!");
-      
-      $('#articleModal').modal('hide');
-      getArticles();
-      // Empty the notes section
-      // $("#notes").empty();
-    });
+    .then(function (data) {
 
-  // Also, remove the values entered in the input and textarea for note entry
-  
-  
-  // $("#bodyinput").val("")
+      console.log(data);
+
+      $('#articleModal').modal('hide');
+
+      getArticles();
+
+    });
 });
