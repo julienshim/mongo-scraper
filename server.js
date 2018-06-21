@@ -4,12 +4,6 @@ var exphbs = require("express-handlebars");
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 
-//Scraping tools
-
-
-//Models
-var db = require("./models");
-
 //Initialize Express
 var app = express();
 var PORT = process.env.PORT || 3333;

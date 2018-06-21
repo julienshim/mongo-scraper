@@ -30,19 +30,22 @@ function getArticles() {
       } else {
         $("#articles").empty();
         for (var i = 0 ; i < data.length; i++) {
-          var noteCount;
+          var noteButtonText;
+          var buttonStyle;
           if (data[i].note !== undefined){
-            noteCount = "1";
+            noteButtonText = "View Note";
+            buttonStyle = "btn-outline-info";
           } else {
-            noteCount = "0";
+            noteButtonText = "Add Note";
+            buttonStyle = "btn-light";
           }
           $("#articles").append(`
             <div class="card">
               <div class="card-header font-weight-bold">${data[i].title}</div>
               <div class="card-body">
               <p class="card-text">${data[i].excerpt}</p>
-                <a href="${data[i].link}" target="_blank" class="btn btn-light">View Article</a>
-                <a href=#" data-id=${data[i]._id} class="btn btn-light commentButton">Notes (${noteCount})</a>
+                <a href="${data[i].link}" target="_blank" class="btn btn-outline-success">View Article</a>
+                <a href=#" data-id=${data[i]._id} class="btn ${buttonStyle} commentButton">${noteButtonText}</a>
               </div>
           </div>`);
           }
@@ -67,12 +70,14 @@ $(document).on("click", ".commentButton", function() {
     .then(function(data) {
 
       console.log(data);
-      $("#modal-body").append("<h4>" + data.title + "</h4>");
+      $("#modal-body").append(`<h4> Article: ${data.title}</h4>`);
       $("#modal-body").append("<hr>");
-      $("#modal-body").append(`<textarea class="form-control" id='bodyinput' name='body' rows="3"></textarea>`);
+      $("#modal-body").append(`<input class="form-control" type="text" placeholder="Note Title" id="titleinput">`);
+      $("#modal-body").append(`<textarea class="form-control" id='bodyinput' placeholder="Note Text Content" name='body' rows="3"></textarea>`);
       $(".saveButton").attr("data-id", data._id);
 
       if (data.note.body) {
+        $("#titleinput").val(data.note.title);
         $("#bodyinput").val(data.note.body);
       }
     });
@@ -92,6 +97,7 @@ $(document).on("click", ".saveButton", function() {
     url: "/articles/" + thisId,
     data: {
       // Value taken from note textarea
+      title: $("#titleinput").val(),
       body: $("#bodyinput").val()
     }
   })
@@ -99,7 +105,7 @@ $(document).on("click", ".saveButton", function() {
     .then(function(data) {
       // Log the response
       console.log(data);
-      console.log("IN HERE!");
+      // console.log("IN HERE!");
       
       $('#articleModal').modal('hide');
       getArticles();
