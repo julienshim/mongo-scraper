@@ -25,7 +25,6 @@ app.set("view engine", "handlebars");
 require("./routes/routes.js")(app);
 
 //Server Start
-app.listen(PORT, function() {
+app.listen(PORT, function () {
     console.log("App listening on PORT http://localhost:" + PORT);
 });
-
