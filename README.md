@@ -20,4 +20,4 @@ The Mongo Scraper: Digital Photography Review Edition was created for the All th
 
 **App Demo GIF**
 
-<img src="https://github.com/jerauld/mongo-scraper/blob/master/public/images/mongoscraper.gif?raw=true" width="600px"/>
+<img src="https://github.com/julienshim/mongo-scraper/blob/master/public/images/mongoscraper.gif?raw=true" width="600px"/>
